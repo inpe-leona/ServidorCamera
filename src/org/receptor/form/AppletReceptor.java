@@ -15,18 +15,10 @@ public class AppletReceptor extends Applet
     private static String session;  
     private static VideoPlayer videoPlayer;
     private static ReceptorStream receptorStream = null;
-    private String server;
-    private String port;
+    public String server;
+    public String port;
   
     public AppletReceptor(){
-        setServer("150.163.46.138");
-        setPort("1235");
-        setVisible(true);
-    }
-    
-    public AppletReceptor(String server, String port){
-        this.server = server;
-        this.port = port;
         setVisible(true);
     }
     
@@ -55,12 +47,14 @@ public class AppletReceptor extends Applet
     }
     
     public void init() {
-        setName("Receptor");
+        setName("Receptor");       
+        server = this.getParameter("server");
+        port = this.getParameter("port");
         receptorStream = new ReceptorStream(videoPlayer, this);
         if (receptorStream.initialize(this)) {
             receptorStream.getSincroniaThread().setConnected(true);
             receptorStream.getSincroniaThread().start();
-            setSize(400, 250);
+            //setSize(400, 250);
         } 
         else  System.out.println("Não Conectou!");               
      }
